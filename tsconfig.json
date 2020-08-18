@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"sourceMap": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": "/",
+		"paths": {
+			"*": [
+				"node_modules",
+				"src/types/*"
+			]
+		}
+	},
+
+	"files": [
+		"src/client/phaser.d.ts",
+		"src/client/game.ts"
+	],
+
+	"exclude": [
+		"node_modules/**/*"
+	]
+}
