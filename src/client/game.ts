@@ -1,8 +1,10 @@
 import 'phaser';
+import { Client } from './client';
 import { PreloadScene } from './scenes/preload-scene';
 import { MainScene } from './scenes/main-scene';
 import { Player } from '../shared/entities/player';
-import { Client } from './client';
+import { MapRenderer } from './render/map/map-renderer';
+import { ClientController } from './client-controller';
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -12,9 +14,7 @@ const config: Phaser.Types.Core.GameConfig = {
 	resolution: 1,
 	backgroundColor: "#EDEEC9",
 	disableContextMenu: true,
-	scene: [
-		PreloadScene, MainScene
-	]
+	scene: [PreloadScene, MainScene]
 };
 
 export class Game extends Phaser.Game {
@@ -23,16 +23,19 @@ export class Game extends Phaser.Game {
 	private isFocused: boolean;
 	private initialized: boolean;
 	public client: Client;
+	public clientController: ClientController;
 
 	constructor(config: Phaser.Types.Core.GameConfig) {
 		super(config);
 
-		this.initialize();
+		this.initialize();	
 	}
 
 	initialize() {
 		//establish network connection
 		this.client = new Client();
+		this.clientController = new ClientController(this);
+		this.clientController.addKeyListeners();
 	}
 }
 
